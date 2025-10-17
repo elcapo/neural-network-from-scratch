@@ -59,14 +59,14 @@ $$
 
 The definition of the $ReLU$ function is:
 
-$$
+```math
     ReLU(z) =
 
     \begin{cases}
         0 & \text{if } z <= 0 \\
         z & \text{if } z > 0
     \end{cases}
-$$
+```
 
 #### Output Layer
 
@@ -155,7 +155,7 @@ $$
 
 If we apply this to the derivative of the softmax, we get:
 
-$$
+```math
 \begin{aligned}
 
     & \frac{\partial s(z_1)}{\partial z_1} = \frac{e^{z_1}\Sigma - e^{2 z_1}}{\Sigma^2} = s(z_1) (1 - s(z_1)) \\
@@ -165,18 +165,18 @@ $$
     & \frac{\partial s(z_2)}{\partial z_1} = \frac{- e^{z_1} e^{z_2}}{\Sigma^2} = - s(z_1) s(z_2)
 
 \end{aligned}
-$$
+```
 
 Now, we won't be as surprised when we see that this generalizes to:
 
-$$
+```math
     \frac{\partial s(z_i)}{\partial z_j} =
 
     \begin{cases}
         s(z_i)(1 - s(z_i)) & \text{if } i = j \\
         - s(z_i) s(z_j) & \text{if } i \neq j
     \end{cases}
-$$
+```
 
 Which is usually simplified by introducing a [Kronecker's delta function](https://en.wikipedia.org/wiki/Kronecker_delta):
 
