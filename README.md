@@ -269,14 +269,14 @@ $$
 
 Where $\odot$ represents the element-wise (Hadamard) product and $ReLU'$ is given by:
 
-$$
+```math
     ReLU'(z) =
 
     \begin{cases}
         0 & \text{if } z <= 0 \\
         1 & \text{if } z > 0
     \end{cases}
-$$
+```
 
 Once we have $d\mathbf{Z}_h$, we can compute the gradients of the weights and biases for the hidden layer:
 
