@@ -11,16 +11,13 @@ class LinearLayer(AbstractLayer):
         self.neurons = neurons
         self.prev_neurons = prev_neurons
         self.activation = activation
+        self.Z = None
+        self.A = None
         self.initialize()
 
     def initialize(self):
         self.W = np.random.rand(self.neurons, self.prev_neurons) * 2 - 1
         self.b = np.random.rand(self.neurons, 1) * 2 - 1
-        self.clear_cache()
-
-    def clear_cache(self):
-        self.Z = None
-        self.A = None
 
     def forward(self, X: np.ndarray, training: bool = False) -> np.ndarray:
         assert isinstance(X, np.ndarray), "X must be a Numpy array"
