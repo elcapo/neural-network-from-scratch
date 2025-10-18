@@ -1,7 +1,7 @@
 import numpy as np
-from nn_from_scratch.abstract.identity_layer import IdentityLayer
-from nn_from_scratch.abstract.linear_layer import LinearLayer, ActivationType
-from nn_from_scratch.encoder import one_hot_encode
+from nn_from_scratch.layers.identity_layer import IdentityLayer
+from nn_from_scratch.layers.linear_layer import LinearLayer, ActivationType
+from nn_from_scratch.encoders.one_hot_encoder import one_hot_encode
 
 class Network:
     def __init__(self, input_size = 28*28, hidden_size = 10, output_size = 10):

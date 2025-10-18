@@ -1,6 +1,6 @@
 from enum import Enum
 import numpy as np
-from nn_from_scratch.abstract.abstract_layer import AbstractLayer
+from nn_from_scratch.layers.abstract_layer import AbstractLayer
 
 class ActivationType(Enum):
     RELU = 1
