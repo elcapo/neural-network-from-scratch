@@ -33,12 +33,7 @@ class Network:
     def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, learning_rate: float = 0.01):
         m = Y.shape[0]
 
-        # Ensure Y is a 1D array and create one-hot encoding matching Y_pred shape
-        Y_flat = Y.flatten() if Y.ndim > 1 else Y
-        Y_one_hot = np.zeros_like(Y_pred)
-        Y_one_hot[Y_flat, np.arange(m)] = 1
-
-        dZ_o = Y_pred - Y_one_hot
+        dZ_o = Y_pred - one_hot_encode(Y)
         dW_o = dZ_o.dot(self.hidden_layer.A.T) / m
         db_o = np.sum(dZ_o, axis=1, keepdims=True) / m
 

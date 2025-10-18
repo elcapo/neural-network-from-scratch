@@ -32,10 +32,10 @@ def test_network_forward_training_mode():
     assert Y.shape == (2, 5), "Forward method should return correct output dimensions in training mode"
 
 def test_network_train_method():
-    network = Network(input_size=3, hidden_size=4, output_size=2)
+    network = Network(input_size=3, hidden_size=10, output_size=10)
     
     X = np.random.rand(3, 10)
-    Y = np.random.randint(0, 2, 10)
+    Y = np.random.randint(0, 2, (10,))
     
     for i, accuracy in network.train(X, Y, iterations=5, learning_rate=0.01):
         assert i == 1, "The train method must return the iteration counter"
@@ -44,7 +44,7 @@ def test_network_train_method():
         break
 
 def test_network_backward_method():
-    network = Network(input_size=3, hidden_size=4, output_size=2)
+    network = Network(input_size=3, hidden_size=10, output_size=10)
     
     X = np.random.rand(3, 10)
     Y = np.random.randint(0, 2, 10)

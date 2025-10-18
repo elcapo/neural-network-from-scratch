@@ -1,16 +1,22 @@
+import sys
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.network import Network
+from nn_from_scratch.ui.progress import show_progress
 
 def main():
+    sys.stdout.write("Loading the dataset. This may take a minute...")
+    sys.stdout.flush()
+
     dataset = Dataset(split='train')
     X, Y = dataset.get_features_and_labels()
-    train(X, Y, 1000, 0.25)
 
-def train(X, Y, iterations: int, learning_rate: float):
     nn = Network()
 
-    for i, accuracy in nn.train(X, Y, iterations=iterations, learning_rate=learning_rate):
-        pass
+    total_iterations = 1500
+    show_progress(0, 100, f"0 completed iterations from a total of {total_iterations}")
+
+    for i, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.1):
+        show_progress(100 * i / total_iterations, 100, f"{i} completed iterations from a total of {total_iterations}")
 
 if __name__ == "__main__":
     main()

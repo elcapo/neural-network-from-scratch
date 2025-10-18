@@ -2,21 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.network import Network
-
-def show_progress(step: int, max: int, message: str):
-    assert max >= step
-
-    sys.stdout.write("\rProgress: |")
-
-    for i in range(max):
-        if i <= step:
-            sys.stdout.write("█")
-        else:
-            sys.stdout.write("·")
-
-    sys.stdout.write(f"| {message}")
-
-    sys.stdout.flush()
+from nn_from_scratch.ui.progress import show_progress
 
 def main():
     sys.stdout.write("Loading the dataset. This may take a minute...")
