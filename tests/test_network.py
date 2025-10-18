@@ -1,7 +1,5 @@
-import pytest
 import numpy as np
 from nn_from_scratch.network import Network
-from nn_from_scratch.layers.linear_layer import ActivationType
 
 def test_network_initialization():
     network = Network(input_size=784, hidden_size=128, output_size=10)
