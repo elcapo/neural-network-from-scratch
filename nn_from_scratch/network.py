@@ -20,17 +20,17 @@ class Network:
         X = self.hidden_layer.forward(X, training)
         return self.output_layer.forward(X, training)
 
-    def train(self, X: np.ndarray, Y: np.ndarray, iterations: int = 100, training_rate: float = 0.01):
+    def train(self, X: np.ndarray, Y: np.ndarray, iterations: int = 100, learning_rate: float = 0.01):
         for i in range(iterations):
             Y_pred = self.forward(X, training=True)
-            self.backward(X, Y, Y_pred, training_rate)
+            self.backward(X, Y, Y_pred, learning_rate)
 
             predictions = np.argmax(Y_pred, axis=0)
             accuracy = round(np.sum(predictions == Y) / Y.size, 2)
 
             yield (i + 1, accuracy,)
 
-    def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, training_rate: float = 0.01):
+    def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, learning_rate: float = 0.01):
         m = Y.shape[0]
 
         # Ensure Y is a 1D array and create one-hot encoding matching Y_pred shape
@@ -49,10 +49,10 @@ class Network:
         dW_h = dZ_h.dot(X.T) / m
         db_h = np.sum(dZ_h, axis=1, keepdims=True) / m
 
-        self.update_params(dW_o, db_o, dW_h, db_h, training_rate)
+        self.update_params(dW_o, db_o, dW_h, db_h, learning_rate)
 
-    def update_params(self, dW_o: np.ndarray, db_o: np.ndarray, dW_h: np.ndarray, db_h: np.ndarray, training_rate: float = 0.01):
-        self.output_layer.W = self.output_layer.W - training_rate * dW_o
-        self.output_layer.b = self.output_layer.b - training_rate * db_o
-        self.hidden_layer.W = self.hidden_layer.W - training_rate * dW_h
-        self.hidden_layer.b = self.hidden_layer.b - training_rate * db_h
+    def update_params(self, dW_o: np.ndarray, db_o: np.ndarray, dW_h: np.ndarray, db_h: np.ndarray, learning_rate: float = 0.01):
+        self.output_layer.W = self.output_layer.W - learning_rate * dW_o
+        self.output_layer.b = self.output_layer.b - learning_rate * db_o
+        self.hidden_layer.W = self.hidden_layer.W - learning_rate * dW_h
+        self.hidden_layer.b = self.hidden_layer.b - learning_rate * db_h
