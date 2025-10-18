@@ -97,7 +97,7 @@ $$
 
 ### Loss Function
 
-Before we start with the backward propagation, we'll need to be able to check how much each of our predictions, $\mathbf{A}_o$ deviated from the real result $\mathbf{y}_{real}$.
+Before we start with the backward propagation, we'll need to be able to check how much each of our predictions, $\mathbf{A}\_o$, deviated from the real result $\mathbf{y}_{real}$.
 
 But our predictions, for each case, are vectors of 10 elements with values that range from 0 to 1 and the real results are single digits. To have comparable results, we have to convert single digit values to lists of 10 elements valued between 0 and 1. That transformation is called $OneHotEncode$:
 
