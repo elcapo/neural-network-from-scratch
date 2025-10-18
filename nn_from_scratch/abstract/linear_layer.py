@@ -46,8 +46,6 @@ class LinearLayer(AbstractLayer):
             return np.maximum(0, Z)
         
         if (self.activation == ActivationType.SOFTMAX):
-            # Subtract max for stability
-            exp_Z = np.exp(Z - np.max(Z, axis=0, keepdims=True))
-            return exp_Z / np.sum(exp_Z, axis=0, keepdims=True)
+            return np.exp(Z) / np.sum(np.exp(Z), axis=0, keepdims=True)
 
         return Z
