@@ -372,13 +372,13 @@ python train.py
 
 #### Hyperparameter Tuning
 
-The `hyper-tune.py` script helps finding the best learning rate for the model. This process will output a single JSON file per iteration with the properties `learning_rate`, `iteration` and `accuracy`. The output can easily be stored as a **jsonl** file:
+The `hyper-tune.py` script helps finding the best learning rate for the model. It executes the training method for a certain number of iterations with different learning rate values and then plot them.
 
 ```bash
-python hyper-tune.py > resources/data/training-report.jsonl
+python hyper-tune.py
 ```
 
-Then the [accuracies-and-learning-rates.ipynb](resources/accuracies-and-learning-rates.ipynb) notebook can be used to plot them and choose the best one. Here's a real example of its output:
+Here's a real example of its output:
 
 ![Accuracies and learning rates](resources/images/accuracy-vs-learning-rate.png)
 
