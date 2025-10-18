@@ -1,11 +1,13 @@
 # Building a Neural Network from Scratch
 
+## Introduction
+
 > [!NOTE]
 > This repository is a follow up of the ideas presented by **Samson Zhang** in his amazing: [Building a neural network from scratch](https://www.youtube.com/watch?v=w8yWXqWQYmU) video. Watch it before digging into the project is highly recommended. Here we try to give the project a second look, rebuilding it with classes and classic Python files instead of using a notebook.
 
-## Introduction
-
 This project is a **from scratch** implementation of a simple neural network built entirely in Python using only basic libraries like NumPy. Its purpose is educational: to help you understand how neural networks actually work under the hood; not just how to call them from high level frameworks like TensorFlow or PyTorch.
+
+## The Goal
 
 The goal of the network is to recognize handwritten digits using the MNIST dataset: a classic collection of 70,000 images of digits from 0 to 9. Each image is small (28×28 pixels) and grayscale, making MNIST an ideal starting point for learning how image classification works. It's simple enough to understand quickly but rich enough to show the key ideas behind modern machine learning.
 
@@ -21,7 +23,7 @@ This repository is designed for beginners and self-learners who want to move fro
 
 ## The Architecture
 
-We'll maintain the structure suggested in the video, with:
+In order to maintain the architecture of our network as simple as possible, we'll reduce it to:
 
 1. an input layer of 784 neurons
 2. a hidden layer of 10 neurons
@@ -381,6 +383,16 @@ To run the training you can use the convenience script `train.py` that's located
 
 ```bash
 python train.py
+```
+
+This will store the model weights and biases in the `resources/weights_and_biases.npy` file.
+
+### Evaluate
+
+To run the evaluation of your trained model, use the `evaluate.py` script:
+
+```bash
+python evaluate.py
 ```
 
 #### Hyperparameter Tuning
