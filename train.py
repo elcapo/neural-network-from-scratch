@@ -1,4 +1,3 @@
-import json
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.network import Network
 
