@@ -15,8 +15,8 @@ def main():
     total_iterations = 1500
     show_progress(0, 100, f"0 completed iterations from a total of {total_iterations}")
 
-    for i, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.1):
-        show_progress(100 * i / total_iterations, 100, f"{i} completed iterations from a total of {total_iterations}")
+    for iteration, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.1):
+        show_progress(100 * iteration / total_iterations, 100, f"{iteration} completed iterations from a total of {total_iterations}")
 
 if __name__ == "__main__":
     main()

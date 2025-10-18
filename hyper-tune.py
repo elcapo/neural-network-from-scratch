@@ -11,8 +11,8 @@ def main():
     dataset = Dataset(split='train')
     X, Y = dataset.get_features_and_labels()
 
-    iterations = 1500
-    learning_rates = [0.5, 0.25, 0.1, 0.01, 0.001]
+    iterations = 2500
+    learning_rates = [0.5, 0.25, 0.1, 0.05]
 
     total_iterations = iterations * len(learning_rates)
     completed_iterations = 0
@@ -23,9 +23,9 @@ def main():
         accuracies_report[learning_rate] = {"iterations": [], "accuracies": []}
 
         nn = Network()
-        for i, accuracy in nn.train(X, Y, iterations=iterations, learning_rate=learning_rate):
-            if i % 30 == 1:
-                accuracies_report[learning_rate]["iterations"].append(i)
+        for iteration, accuracy in nn.train(X, Y, iterations=iterations, learning_rate=learning_rate):
+            if (iteration - 1) % 50 == 0 or iteration == iterations:
+                accuracies_report[learning_rate]["iterations"].append(iteration)
                 accuracies_report[learning_rate]["accuracies"].append(accuracy)
 
             completed_iterations += 1
