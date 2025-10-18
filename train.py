@@ -5,4 +5,7 @@ dataset = Dataset(split='train')
 X, Y = dataset.get_features_and_labels()
 
 nn = Network()
-nn.train(X, Y, iterations=1000, training_rate=0.1)
+
+print("Training the model")
+for i, accuracy in nn.train(X, Y, iterations=1000, training_rate=0.1):
+    print(f"Iteration: {i} > Accuracy: {accuracy}")
