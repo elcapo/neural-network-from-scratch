@@ -361,3 +361,11 @@ cd resources/data/
 unzip mnist_test.zip
 unzip mnist_train.zip
 ```
+
+### Train
+
+To run the training you can use the convenience script `train.py` that's located at the root of the project:
+
+```bash
+python train.py
+```
