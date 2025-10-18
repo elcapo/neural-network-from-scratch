@@ -14,7 +14,7 @@ def main():
     total_iterations = 2500
     show_progress(0, 100, f"0 completed iterations from a total of {total_iterations}")
 
-    for iteration, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.1):
+    for iteration, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.25):
         show_progress(100 * iteration / total_iterations, 100, f"{iteration} completed iterations from a total of {total_iterations}")
     
     weights_and_biases_path = "resources/weights_and_biases.npy"
