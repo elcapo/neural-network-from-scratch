@@ -369,3 +369,19 @@ To run the training you can use the convenience script `train.py` that's located
 ```bash
 python train.py
 ```
+
+## Test
+
+There is a test suite available that can be executed with Pytest:
+
+```bash
+pytest -vvv
+```
+
+### Coverage
+
+The Pytest Coverage plugin is also installed, so a test coverage report can easily be obtained:
+
+```bash
+pytest --cov-report term-missing --cov=nn_from_scratch tests/
+```
