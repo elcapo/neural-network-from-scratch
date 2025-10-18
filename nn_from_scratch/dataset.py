@@ -11,12 +11,9 @@ class Dataset:
     def read_dataframe(self, shuffle: bool = True):
         path = self.get_path()
 
-        print("Reading the dataset")
-
         dataframe = pd.read_csv(path, header=None, names=["label"] + [f"pixel_{n}" for n in range(784)])
 
         if shuffle:
-            print("Shuffling the dataset")
             dataframe = dataframe.sample(frac=1)
 
         return dataframe

@@ -370,6 +370,18 @@ To run the training you can use the convenience script `train.py` that's located
 python train.py
 ```
 
+#### Hyperparameter Tuning
+
+The `hyper-tune.py` script helps finding the best learning rate for the model. This process will output a single JSON file per iteration with the properties `learning_rate`, `iteration` and `accuracy`. The output can easily be stored as a **jsonl** file:
+
+```bash
+python hyper-tune.py > resources/data/training-report.jsonl
+```
+
+Then the [accuracies-and-learning-rates.ipynb](resources/accuracies-and-learning-rates.ipynb) notebook can be used to plot them and choose the best one. Here's a real example of its output:
+
+![Accuracies and learning rates](resources/images/accuracy-vs-learning-rate.png)
+
 ## Test
 
 There is a test suite available that can be executed with Pytest:

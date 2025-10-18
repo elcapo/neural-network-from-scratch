@@ -1,5 +1,6 @@
 .coverage
 .venv
 .vscode
+.ipynb_checkpoints
 __pycache__
 resources/data/*.csv
