@@ -36,7 +36,7 @@ Our neural network is designed with simplicity and educational clarity in mind, 
 > [!TIP]
 > For a deep dive into the mathematical foundations of this architecture, refer to the [detailed mathematical documentation](docs/the-math.md).
 
-![Network Diagram](./resources/images/network-diagram.svg)
+![Network Diagram](./resources/images/network-diagram.png)
 
 ### Mathematical Foundations
 
