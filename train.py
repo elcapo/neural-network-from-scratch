@@ -1,13 +1,17 @@
+import sys
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.network import Network
 from nn_from_scratch.repository import Repository
 from nn_from_scratch.ui.progress import show_progress
 
 def main():
-    print("Loading the training dataset. This may take a minute...")
+    sys.stdout.write("Loading the training dataset. This may take a minute...")
+    sys.stdout.flush()
 
     dataset = Dataset(split='train')
     X, Y = dataset.get_features_and_labels()
+
+    sys.stdout.write("\r")
 
     nn = Network()
 

@@ -5,11 +5,13 @@ from nn_from_scratch.network import Network
 from nn_from_scratch.ui.progress import show_progress
 
 def main():
-    sys.stdout.write("Loading the dataset. This may take a minute...")
+    sys.stdout.write("Loading the training dataset. This may take a minute...")
     sys.stdout.flush()
 
     dataset = Dataset(split='train')
     X, Y = dataset.get_features_and_labels()
+
+    sys.stdout.write("\r")
 
     iterations = 2500
     learning_rates = [0.5, 0.25, 0.1, 0.05]
@@ -33,7 +35,7 @@ def main():
 
     plot(accuracies_report)
 
-def plot(accuracies_report):
+def plot(accuracies_report: dict):
     plt.figure(figsize=(10, 6))
 
     for learning_rate in sorted(accuracies_report.keys()):
