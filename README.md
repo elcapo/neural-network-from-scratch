@@ -33,12 +33,6 @@ Our neural network is designed with simplicity and educational clarity in mind, 
 | Hidden Layer | 10 | Applies non-linear transformations to extract features |
 | Output Layer | 10 | Predicts the probability of each digit (0-9) |
 
-### Key Architectural Choices
-
-- **Input Layer (784 neurons)**: Each neuron corresponds to a pixel in the 28×28 grayscale MNIST image
-- **Hidden Layer (10 neurons)**: Kept small for simplicity, demonstrating core neural network principles
-- **Output Layer (10 neurons)**: One neuron per digit, representing the probability of the input being that digit
-
 > [!TIP]
 > For a deep dive into the mathematical foundations of this architecture, refer to the [detailed mathematical documentation](docs/the-math.md).
 
