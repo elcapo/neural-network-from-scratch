@@ -30,14 +30,6 @@ class Network:
 
             yield (i + 1, accuracy,)
 
-    def evaluate(self, X: np.ndarray, Y: np.ndarray) -> float:
-        Y_pred = self.forward(X, training=True)
-
-        predictions = np.argmax(Y_pred, axis=0)
-        accuracy = round(np.sum(predictions == Y) / Y.size, 2)
-
-        return accuracy
-
     def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, learning_rate: float = 0.01):
         m = Y.shape[0]
 
