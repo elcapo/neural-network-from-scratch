@@ -1,8 +1,25 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.evaluation import Evaluation
 from nn_from_scratch.network import Network
 from nn_from_scratch.repository import Repository
+
+def plot(confusion_matrix: np.ndarray):
+    fig, ax = plt.subplots(1 ,1)
+
+    image = ax.imshow(confusion_matrix, interpolation=None)
+    colorbar = fig.colorbar(image, ax=ax, orientation='horizontal', fraction=.1)
+
+    colorbar.ax.set_xlabel('Sample count')
+
+    ax.set_xticks(range(0, 10))
+    ax.set_yticks(range(0, 10))
+
+    plt.xlabel("Predicted values")
+    plt.ylabel("Actual values")
+    plt.title("Confusion matrix")
+    plt.show()
 
 def main():
     print("Loading the test dataset. This may take a minute...")
@@ -29,6 +46,8 @@ def main():
 
     print("The binary confusion matrix of the model is:\n")
     print(evaluation.binary_confusion_matrix(Y, Y_pred))
+
+    plot(confusion_matrix)
 
 if __name__ == "__main__":
     main()

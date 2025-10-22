@@ -407,6 +407,24 @@ Here's a real example of its output:
 
 ![Accuracies and learning rates](resources/images/accuracy-vs-learning-rate.png)
 
+#### Evaluation
+
+In order to get an idea of how good the model is, a `evaluate.py` script has been included in the root of the project.
+
+```bash
+python evaluate.py
+```
+
+Running it will output the model's:
+
+* accuracy
+* confusion matrix
+* binary confusion matrix
+
+Also, the model's confusion matrix will be plotted:
+
+![Confusion matrix](resources/images/confusion-matrix.png)
+
 ## Test
 
 There is a test suite available that can be executed with Pytest:
