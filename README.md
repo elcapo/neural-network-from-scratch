@@ -137,15 +137,29 @@ In order to get an idea of how good the model is, a `evaluate.py` script has bee
 python evaluate.py
 ```
 
-Running it will output the model's:
+Running it will output the model's accuracy, confusion matrix and binary confusion matrix.
 
-* accuracy
-* confusion matrix
-* binary confusion matrix
+These were the results of running the evaluation with the weights that are stored in [resources/weights_and_biases.npy](resources/weights_and_biases.npy):
 
-Also, the model's confusion matrix will be plotted:
+##### Accuracy
+
+The mean accuracy of the model in the test set is: **90%**.
+
+##### Confusion Matrix
 
 ![Confusion matrix](resources/images/confusion-matrix.png)
+
+#### Inspection
+
+To satisfy the curiosity of the hungry minds, an additional script was added that visualizes the weights of the hidden layer.
+
+```bash
+python plot_weights.py
+```
+
+![Hidden weights and biases](resources/images/weights-and-biases.png)
+
+This was added as a reminder that although the network is simple and small, its learning has a random side that may make it hard to interpret.
 
 ## Test
 
