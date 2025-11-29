@@ -9,6 +9,7 @@ def main():
     sys.stdout.flush()
 
     dataset = Dataset(split='train')
+    dataset.extract()
     X, Y = dataset.get_features_and_labels()
 
     sys.stdout.write("\r")

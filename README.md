@@ -89,16 +89,6 @@ To install all the dependencies, just run:
 pip install -r requirements.txt
 ```
 
-#### Uncompress the Datasources
-
-Finally, uncompress the datasources:
-
-```bash
-cd resources/data/
-unzip mnist_test.zip
-unzip mnist_train.zip
-```
-
 ### Train
 
 To run the training you can use the convenience script `train.py` that's located at the root of the project:
@@ -139,7 +129,7 @@ python evaluate.py
 
 Running it will output the model's accuracy, confusion matrix and binary confusion matrix.
 
-These were the results of running the evaluation with the weights that are stored in [resources/weights_and_biases.json](resources/weights_and_biases.json):
+These were the results of running the evaluation with the weights that are stored in `resources/weights_and_biases.json`:
 
 ##### Accuracy
 
