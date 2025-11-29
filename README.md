@@ -107,7 +107,7 @@ To run the training you can use the convenience script `train.py` that's located
 python train.py
 ```
 
-This will store the model weights and biases in the `resources/weights_and_biases.npy` file.
+This will store the model weights and biases in the `resources/weights_and_biases.json` file.
 
 ### Evaluate
 
@@ -139,7 +139,7 @@ python evaluate.py
 
 Running it will output the model's accuracy, confusion matrix and binary confusion matrix.
 
-These were the results of running the evaluation with the weights that are stored in [resources/weights_and_biases.npy](resources/weights_and_biases.npy):
+These were the results of running the evaluation with the weights that are stored in [resources/weights_and_biases.json](resources/weights_and_biases.json):
 
 ##### Accuracy
 

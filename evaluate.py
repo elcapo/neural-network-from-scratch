@@ -17,7 +17,7 @@ def main():
 
     nn = Network()
     repository = Repository()
-    repository.load(nn, "resources/weights_and_biases.npy")
+    repository.load(nn, "resources/weights_and_biases.json")
     evaluation = Evaluation(nn)
 
     predicted_probabilities = nn.forward(X, training=True)

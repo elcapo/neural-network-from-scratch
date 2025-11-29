@@ -21,7 +21,7 @@ def main():
     for iteration, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.25):
         show_progress(100 * iteration / total_iterations, 100, f"{iteration} completed iterations from a total of {total_iterations}")
     
-    weights_and_biases_path = "resources/weights_and_biases.npy"
+    weights_and_biases_path = "resources/weights_and_biases.json"
     repository = Repository()
     repository.store(nn, weights_and_biases_path)
 

@@ -6,7 +6,7 @@ from nn_from_scratch.repository import Repository
 def main():
     nn = Network()
     repository = Repository()
-    repository.load(nn, "resources/weights_and_biases.npy")
+    repository.load(nn, "resources/weights_and_biases.json")
 
     plot_hidden_layer(nn.hidden_layer.W + nn.hidden_layer.b)
 
