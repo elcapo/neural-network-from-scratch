@@ -79,14 +79,18 @@ $$
 
 ### Backward Propagation
 
-Backward propagation computes gradients of the loss function with respect to all parameters and activations, enabling parameter updates via gradient descent. We assume a cross-entropy loss function $\mathcal{L}$ that measures the difference between predicted probabilities $\mathbf{A}_o$​ and ground-truth labels $\mathbf{Y}$.
+Backward propagation computes gradients of the loss function with respect to all parameters and activations, enabling parameter updates via gradient descent. We assume a cross-entropy loss function $J$. In order to avoid having to consider a $\frac{1}{m}$ factor for all the derivatives below, we'll define our loss function as an average of the loss functions for each sample:
+
+$$
+J = \frac{1}{m} \sum_{i=1}^{m} \mathcal{L}_i
+$$
 
 #### Loss Function
 
-We'll use a cross-entropy to compute our losses:
+We'll use a cross-entropy function:
 
 $$
-\mathcal{L} = - \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{10} Y_{ij} log(A_{o,ij})
+\mathcal{L} = - \sum_{j=1}^{10} Y_{j} log(A_{o,j})
 $$
 
 #### Output Layer Activation
@@ -94,7 +98,7 @@ $$
 The gradient of the loss with respect to the output layer's activation $\mathbf{A}_o$​ is derived from the cross-entropy loss function $\mathcal{L}$:
 
 $$
-\frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} = - \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{10} Y_{ij} \frac{1}{A_{o,ij}}
+\frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} = - \sum_{j=1}^{10} Y_{j} \frac{1}{A_{o,j}}
 $$
 
 Next, the gradient of the loss with respect to the output layer pre-activation $\mathbf{Z}_o$​ is computed by applying the chain rule, which combines the derivative of the cross-entropy loss with respect to the Softmax output $\mathbf{A}_o$ and the derivative of the Softmax function:
@@ -103,10 +107,10 @@ $$
     \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o} = \frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} \frac{\partial \mathbf{A}_o}{\partial \mathbf{Z}_o}
 $$
 
-Things get a little tricky here. Let's consider the $i^{th}$ element of the loss gradient with respect to the pre-activation $z_i$​ for a single sample (omitting the $\frac{1}{m}$​ and summation for clarity). Applying the chain rule requires summing over all output classes $j$:
+Things get a little tricky here. Let's consider one the elements of the loss gradient with respect to the pre-activation $z$​ for a single sample. Applying the chain rule requires summing over all output classes $j$:
 
 $$
-\frac{\partial \mathcal{L}}{\partial z_i} = \sum_{j} \frac{\partial \mathcal{L}}{\partial a_j} \frac{\partial a_j}{\partial z_j}
+\frac{\partial \mathcal{L}}{\partial z_i} = \sum_{j} \frac{\partial \mathcal{L}}{\partial a_j} \frac{\partial a_j}{\partial z_i}
 $$
 
 Here we'll consider the derivative of the loss function with respect to a single $a_j$, which we can write as:
@@ -118,7 +122,7 @@ $$
 By aplying the  [derivative of the Softmax function](softmax-derivative.md) we can say that:
 
 $$
-\frac{\partial a_j}{\partial z_j} = a_j (\delta_{ij} - a_i)
+\frac{\partial a_j}{\partial z_i} = a_j (\delta_{ij} - a_i)
 $$
 
 Replacing these two expressions in our derivative of the loss with regards to $z_i$ we get:
