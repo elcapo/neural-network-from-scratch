@@ -165,11 +165,11 @@ Using the chain rule and the property that the derivative of cross-entropy loss 
 The gradients of the weights and biases of the output layer follow:
 
 $$
-    \frac{\partial \mathcal{L}}{\partial \mathbf{W}_o} = \frac{1}{m} \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o} \mathbf{A}_h^T
+    \frac{\partial \mathcal{L}}{\partial \mathbf{W}_o} = \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o} \mathbf{A}_h^T
 $$
 
 $$
-    \frac{\partial \mathcal{L}}{\partial \mathbf{b}_o} = \frac{1}{m} \sum \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o}
+    \frac{\partial \mathcal{L}}{\partial \mathbf{b}_o} = \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o}
 $$
 
 Which we obtained by applying the chain rule:
