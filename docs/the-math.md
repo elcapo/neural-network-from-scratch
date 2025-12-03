@@ -91,13 +91,66 @@ $$
 
 #### Output Layer Activation
 
-The gradient of the loss with respect to the output layer pre-activation is:
+The gradient of the loss with respect to the output layer's activation $\mathbf{A}_o$​ is derived from the cross-entropy loss function $\mathcal{L}$:
+
+$$
+\frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} = - \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{10} Y_{ij} \frac{1}{A_{o,ij}}
+$$
+
+Next, the gradient of the loss with respect to the output layer pre-activation $\mathbf{Z}_o$​ is computed by applying the chain rule, which combines the derivative of the cross-entropy loss with respect to the Softmax output $\mathbf{A}_o$ and the derivative of the Softmax function:
+
+$$
+    \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o} = \frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} \frac{\partial \mathbf{A}_o}{\partial \mathbf{Z}_o}
+$$
+
+Things get a little tricky here. Let's consider the $i^{th}$ element of the loss gradient with respect to the pre-activation $z_i$​ for a single sample (omitting the $\frac{1}{m}$​ and summation for clarity). Applying the chain rule requires summing over all output classes $j$:
+
+$$
+\frac{\partial \mathcal{L}}{\partial z_i} = \sum_{j} \frac{\partial \mathcal{L}}{\partial a_j} \frac{\partial a_j}{\partial z_j}
+$$
+
+Here we'll consider the derivative of the loss function with respect to a single $a_j$, which we can write as:
+
+$$
+\frac{\partial \mathcal{L}}{\partial a_j} = - \frac{y_j}{a_j}
+$$
+
+By aplying the  [derivative of the Softmax function](softmax-derivative.md) we can say that:
+
+$$
+\frac{\partial a_j}{\partial z_j} = a_j (\delta_{ij} - a_i)
+$$
+
+Replacing these two expressions in our derivative of the loss with regards to $z_i$ we get:
+
+$$
+\frac{\partial \mathcal{L}}{\partial z_i} = \sum_{j} \biggl( - \frac{y_j}{a_j} \biggl) (a_j (\delta_{ij} - a_i))
+$$
+
+Cancelling $a_j$ and distributting the summations:
+
+$$
+\frac{\partial \mathcal{L}}{\partial z_i} = - \biggl( \sum_{j} y_j \delta_{ij} - \sum_{j} y_j a_i \biggr)
+$$
+
+Things start to simplify now, because:
+
+* The term $\sum_{j} y_j \delta_{ji}$ simplifies to $y_i$. Since the ground truth $\mathbf{Y}$ is one-hot encoded, only the term where $j=i$ survives ($\delta_{ji}=1$), and $\delta_{ji}=0$ for all others.
+* The term $\sum_{j} y_j a_i$ simplifies to $a_i \sum_{j} y_j$. Since $\mathbf{Y}$ is one-hot encoded, $\sum_{j} y_j = 1$. This leaves $a_i$.
+
+Therefore we get:
+
+$$
+\frac{\partial \mathcal{L}}{\partial z_i} = - [y_i - a_i] = a_i - y_i
+$$
+
+Which we can express as:
 
 $$
 \frac{\partial \mathcal{L}}{\partial \mathbf{Z}_o} = \mathbf{A}_o - \mathbf{Y}
 $$
 
-Using the chain rule and the property that the derivative of cross-entropy loss combined with softmax activation simplifies to this difference. A [detailed proof](softmax-derivative.md) is available.
+Using the chain rule and the property that the derivative of cross-entropy loss combined with softmax activation simplifies to this difference.
 
 ##### Dimensions
 
