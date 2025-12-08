@@ -1,6 +1,8 @@
 import numpy as np
 from nn_from_scratch.layers.identity_layer import IdentityLayer
 from nn_from_scratch.layers.linear_layer import LinearLayer, ActivationType
+from nn_from_scratch.layers.relu_layer import ReluLayer
+from nn_from_scratch.layers.softmax_layer import SoftmaxLayer
 from nn_from_scratch.encoders.one_hot_encoder import one_hot_encode
 
 class Network:
@@ -12,13 +14,17 @@ class Network:
 
     def initialize(self):
         self.input_layer = IdentityLayer(self.input_size)
-        self.hidden_layer = LinearLayer(self.hidden_size, self.input_size, ActivationType.RELU)
-        self.output_layer = LinearLayer(self.output_size, self.hidden_size, ActivationType.SOFTMAX)
+        self.hidden_layer = LinearLayer(self.hidden_size, self.input_size)
+        self.relu_layer = ReluLayer(self.hidden_size)
+        self.output_layer = LinearLayer(self.output_size, self.hidden_size)
+        self.softmax_layer = SoftmaxLayer(self.output_size)
 
     def forward(self, X: np.ndarray, training: bool = False) -> np.ndarray:
-        X = self.input_layer.forward(X)
+        X = self.input_layer.forward(X, training)
         X = self.hidden_layer.forward(X, training)
-        return self.output_layer.forward(X, training)
+        X = self.relu_layer.forward(X, training)
+        X = self.output_layer.forward(X, training)
+        return self.softmax_layer.forward(X, training)
 
     def train(self, X: np.ndarray, Y: np.ndarray, iterations: int = 100, learning_rate: float = 0.01):
         for i in range(iterations):
