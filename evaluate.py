@@ -21,7 +21,7 @@ def main():
     repository.load(nn, "resources/weights_and_biases.json")
     evaluation = Evaluation(nn)
 
-    predicted_probabilities = nn.forward(X, training=True)
+    predicted_probabilities, _ = nn.forward(X, training=True)
     Y_pred = np.argmax(predicted_probabilities, axis=0)
 
     accuracy = evaluation.accuracy(Y, Y_pred)

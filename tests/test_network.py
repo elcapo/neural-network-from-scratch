@@ -15,7 +15,7 @@ def test_network_forward_method():
     network = Network(input_size=3, hidden_size=4, output_size=2)
     
     X = np.random.rand(3, 5)
-    Y = network.forward(X)
+    Y, _ = network.forward(X)
     
     assert Y.shape == (2, 5), "Forward method should return correct output dimensions"
     assert (Y >= 0).all(), "Softmax output should be non-negative"
@@ -25,13 +25,13 @@ def test_network_forward_training_mode():
     network = Network(input_size=3, hidden_size=4, output_size=2)
     
     X = np.random.rand(3, 5)
-    Y = network.forward(X, training=True)
+    Y, _ = network.forward(X, training=True)
     
     assert Y.shape == (2, 5), "Forward method should return correct output dimensions in training mode"
 
 def test_network_train_method():
     network = Network(input_size=3, hidden_size=10, output_size=10)
-    
+
     X = np.random.rand(3, 10)
     Y = np.random.randint(0, 2, (10,))
     
@@ -46,12 +46,12 @@ def test_network_backward_method():
     
     X = np.random.rand(3, 10)
     Y = np.random.randint(0, 2, 10)
-    Y_pred = network.forward(X, training=True)
+    Y_pred, steps = network.forward(X, training=True)
     
     initial_output_weights = network.output_layer.W.copy()
     initial_hidden_weights = network.hidden_layer.W.copy()
     
-    network.backward(X, Y, Y_pred, learning_rate=0.01)
+    network.backward(X, Y, Y_pred, steps, learning_rate=0.01)
     
     assert not np.array_equal(network.output_layer.W, initial_output_weights), "Backward method should update output layer weights"
     assert not np.array_equal(network.hidden_layer.W, initial_hidden_weights), "Backward method should update hidden layer weights"
