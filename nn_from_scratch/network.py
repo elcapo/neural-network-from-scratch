@@ -5,6 +5,13 @@ from nn_from_scratch.layers.relu_layer import ReluLayer
 from nn_from_scratch.layers.softmax_layer import SoftmaxLayer
 from nn_from_scratch.encoders.one_hot_encoder import one_hot_encode
 
+class Steps:
+    input_layer: np.ndarray
+    hidden_layer: np.ndarray
+    relu_layer: np.ndarray
+    output_layer: np.ndarray
+    softmax_layer: np.ndarray
+
 class Network:
     def __init__(self, input_size = 28*28, hidden_size = 10, output_size = 10):
         self.input_size = input_size
@@ -19,33 +26,33 @@ class Network:
         self.output_layer = LinearLayer(self.output_size, self.hidden_size)
         self.softmax_layer = SoftmaxLayer(self.output_size)
 
-    def forward(self, X: np.ndarray, training: bool = False) -> tuple[np.ndarray]:
-        steps = {}
+    def forward(self, X: np.ndarray, training: bool = False) -> tuple[np.ndarray, Steps]:
+        steps = Steps()
 
         X = self.input_layer.forward(X)
 
         if training:
-            steps["input_layer"] = X
+            steps.input_layer = X
 
         X = self.hidden_layer.forward(X)
 
         if training:
-            steps["hidden_layer"] = X
+            steps.hidden_layer = X
 
         X = self.relu_layer.forward(X)
 
         if training:
-            steps["relu_layer"] = X
+            steps.relu_layer = X
 
         X = self.output_layer.forward(X)
 
         if training:
-            steps["output_layer"] = X
+            steps.output_layer = X
 
         X = self.softmax_layer.forward(X)
 
         if training:
-            steps["softmax_layer"] = X
+            steps.softmax_layer = X
 
         return X, steps
 
@@ -59,15 +66,15 @@ class Network:
 
             yield (i + 1, accuracy,)
 
-    def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, steps: dict, learning_rate: float = 0.01):
+    def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, steps: Steps, learning_rate: float = 0.01):
         m = Y.shape[0]
 
         dZ_o = Y_pred - one_hot_encode(Y)
-        dW_o = dZ_o.dot(steps["softmax_layer"].T) / m
+        dW_o = dZ_o.dot(steps.softmax_layer.T) / m
         db_o = np.sum(dZ_o, axis=1, keepdims=True) / m
 
         W_o = self.output_layer.W
-        Z_h = steps["hidden_layer"]
+        Z_h = steps.hidden_layer
 
         dZ_h = W_o.T.dot(dZ_o) * (Z_h > 0)
         dW_h = dZ_h.dot(X.T) / m
