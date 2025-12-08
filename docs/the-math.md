@@ -257,3 +257,10 @@ $$
 At each training step (or epoch), the network computes predictions through forward propagation, measures the loss, computes all gradients through backward propagation and updates the parameters using these equations.
 
 Over time, this process gradually reduces the loss and improves accuracy.
+
+### References
+
+To get a refresh about how these things are calculated, check:
+
+* [Matrix Calculus for Machine Learning and Beyond](https://www.youtube.com/watch?v=0YqjeqLhDDE&list=PLUl4u3cNGP62EaLLH92E_VCN4izBKK6OE), by the MIT
+* [The Matrix Calculus You Need For Deep Learning](https://arxiv.org/pdf/1802.01528)

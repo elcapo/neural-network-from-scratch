@@ -34,7 +34,7 @@ Our neural network is designed with simplicity and educational clarity in mind, 
 | Output Layer | 10 | Predicts the probability of each digit (0-9) |
 
 > [!TIP]
-> For a deep dive into the mathematical foundations of this architecture, refer to the [detailed mathematical documentation](docs/the-math.md).
+> For a deep dive into the mathematical foundations of this architecture, refer to the detailed [mathematical documentation](docs/the-math.md).
 
 ![Network Diagram](./resources/images/network-diagram.png)
 
