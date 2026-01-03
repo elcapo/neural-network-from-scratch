@@ -63,30 +63,14 @@ cd neural-network-from-scratch.git
 
 ### Install
 
-Once you have the code, you'll need to install its dependencies.
-
-#### Create a Virtual Environment
-
-Before doing so, creating a Python virtual environment is recommended:
-
-```bash
-python -m venv .venv
-```
-
-#### Activate the Virtual Environment
-
-After creating the virtual environment, you need to activate it so that you can start using it:
-
-```bash
-source .venv/bin/activate
-```
+Once you have the code, you'll need to install its dependencies. You are encouraged to use [uv](https://docs.astral.sh/uv/) for that.
 
 #### Install the Dependencies
 
 To install all the dependencies, just run:
 
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Train
@@ -94,25 +78,19 @@ pip install -r requirements.txt
 To run the training you can use the convenience script `train.py` that's located at the root of the project:
 
 ```bash
-python train.py
+uv run train.py
 ```
 
 This will store the model weights and biases in the `resources/weights_and_biases.json` file.
 
 ### Evaluate
 
-To run the evaluation of your trained model, use the `evaluate.py` script:
-
-```bash
-python evaluate.py
-```
-
 #### Hyperparameter Tuning
 
 The `hyper-tune.py` script helps finding the best learning rate for the model. It executes the training method for a certain number of iterations with different learning rate values and then plot them.
 
 ```bash
-python hyper-tune.py
+uv run hyper-tune.py
 ```
 
 Here's a real example of its output:
@@ -124,7 +102,7 @@ Here's a real example of its output:
 In order to get an idea of how good the model is, a `evaluate.py` script has been included in the root of the project.
 
 ```bash
-python evaluate.py
+uv run evaluate.py
 ```
 
 Running it will output the model's accuracy, confusion matrix and binary confusion matrix.
@@ -144,7 +122,7 @@ The mean accuracy of the model in the test set is: **90%**.
 To satisfy the curiosity of the hungry minds, an additional script was added that visualizes the weights of the hidden layer.
 
 ```bash
-python plot_weights.py
+uv run plot_weights.py
 ```
 
 ![Hidden weights and biases](resources/images/weights-and-biases.png)
@@ -153,10 +131,12 @@ This was added as a reminder that although the network is simple and small, its 
 
 ## Test
 
+### Run the Tests
+
 There is a test suite available that can be executed with Pytest:
 
 ```bash
-pytest -vvv
+uv run poe test
 ```
 
 ### Coverage
@@ -164,5 +144,11 @@ pytest -vvv
 The Pytest Coverage plugin is also installed, so a test coverage report can easily be obtained:
 
 ```bash
-pytest --cov-report term-missing --cov=nn_from_scratch tests/
+uv run poe coverage
+```
+
+You'll typically want to run tests and test coverage all at once:
+
+```bash
+uv run poe test && uv run poe coverage
 ```
