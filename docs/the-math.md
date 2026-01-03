@@ -82,7 +82,7 @@ $$
 Backward propagation computes gradients of the loss function with respect to all parameters and activations, enabling parameter updates via gradient descent. We assume a cross-entropy loss function $J$. In order to avoid having to consider a $\frac{1}{m}$ factor for all the derivatives below, we'll define our loss function as an average of the loss functions for each sample:
 
 $$
-J = \frac{1}{m} \sum_{i=1}^{m} \mathcal{L}_i
+J = \frac{\mathcal{L}}{m}
 $$
 
 #### Loss Function
@@ -90,7 +90,7 @@ $$
 We'll use a cross-entropy function:
 
 $$
-\mathcal{L} = - \sum_{j=1}^{10} Y_{j} log(A_{o,j})
+\mathcal{L} = - tr(\mathbf{Y}^T log(\mathbf{A_{o}}))
 $$
 
 #### Output Layer Activation
@@ -98,8 +98,10 @@ $$
 The gradient of the loss with respect to the output layer's activation $\mathbf{A}_o$​ is derived from the cross-entropy loss function $\mathcal{L}$:
 
 $$
-\frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} = - \sum_{j=1}^{10} Y_{j} \frac{1}{A_{o,j}}
+\frac{\partial \mathcal{L}}{\partial \mathbf{A}_o} = - \mathbf{Y} \oslash \mathbf{A_{o}}
 $$
+
+where $\oslash$ represents an elementwise division.
 
 Next, the gradient of the loss with respect to the output layer pre-activation $\mathbf{Z}_o$​ is computed by applying the chain rule, which combines the derivative of the cross-entropy loss with respect to the Softmax output $\mathbf{A}_o$ and the derivative of the Softmax function:
 
@@ -262,5 +264,6 @@ Over time, this process gradually reduces the loss and improves accuracy.
 
 To get a refresh about how these things are calculated, check:
 
+* [Matrix Derivatives: What's up with all those transposes?](https://www.youtube.com/watch?v=ny-i8_9NtHA)
 * [Matrix Calculus for Machine Learning and Beyond](https://www.youtube.com/watch?v=0YqjeqLhDDE&list=PLUl4u3cNGP62EaLLH92E_VCN4izBKK6OE), by the MIT
 * [The Matrix Calculus You Need For Deep Learning](https://arxiv.org/pdf/1802.01528)
