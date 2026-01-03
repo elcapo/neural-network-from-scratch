@@ -1,6 +1,7 @@
 import numpy as np
 from nn_from_scratch.layers.abstract_layer import AbstractLayer
 
+
 class ReluLayer(AbstractLayer):
     def __init__(self, prev_neurons: int):
         self.prev_neurons = prev_neurons

@@ -152,3 +152,16 @@ You'll typically want to run tests and test coverage all at once:
 ```bash
 uv run poe test && uv run poe coverage
 ```
+
+## Coding styles
+
+```bash
+# Run the linter fixes
+uv run poe lint
+
+# Run the format fixes
+uv run poe format
+
+# Run the linter and formatter fixes
+uv run poe lint && uv run poe format
+```

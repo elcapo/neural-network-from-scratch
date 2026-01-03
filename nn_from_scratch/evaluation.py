@@ -1,6 +1,7 @@
 import numpy as np
 from nn_from_scratch.network import Network
 
+
 class Evaluation:
     def __init__(self, network: Network):
         self.network = network
@@ -42,5 +43,5 @@ class Evaluation:
 
         for category in range(0, 10):
             binary_confusion_matrix += self.binary_confusion_matrix_per_category(Y, Y_pred, category)
-        
+
         return binary_confusion_matrix

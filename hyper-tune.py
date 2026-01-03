@@ -4,11 +4,12 @@ from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.network import Network
 from nn_from_scratch.ui.progress import show_progress
 
+
 def main():
     sys.stdout.write("Loading the training dataset. This may take a minute...")
     sys.stdout.flush()
 
-    dataset = Dataset(split='train')
+    dataset = Dataset(split="train")
     X, Y = dataset.get_features_and_labels()
 
     sys.stdout.write("\r")
@@ -31,9 +32,14 @@ def main():
                 accuracies_report[learning_rate]["accuracies"].append(accuracy)
 
             completed_iterations += 1
-            show_progress(100 * completed_iterations / total_iterations, 100, f"{completed_iterations} completed iterations from a total of {total_iterations}")
+            show_progress(
+                100 * completed_iterations / total_iterations,
+                100,
+                f"{completed_iterations} completed iterations from a total of {total_iterations}",
+            )
 
     plot(accuracies_report)
+
 
 def plot(accuracies_report: dict):
     plt.figure(figsize=(10, 6))
@@ -42,14 +48,7 @@ def plot(accuracies_report: dict):
         accuracies = accuracies_report[learning_rate]["accuracies"]
         iterations = accuracies_report[learning_rate]["iterations"]
 
-        plt.plot(
-            iterations,
-            accuracies,
-            marker='o',
-            label=f"Learning rate = {learning_rate}",
-            linewidth=2,
-            markersize=4
-        )
+        plt.plot(iterations, accuracies, marker="o", label=f"Learning rate = {learning_rate}", linewidth=2, markersize=4)
 
     plt.xlabel("Iteration")
     plt.ylabel("Accuracy")
@@ -58,6 +57,7 @@ def plot(accuracies_report: dict):
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
+
 
 if __name__ == "__main__":
     main()

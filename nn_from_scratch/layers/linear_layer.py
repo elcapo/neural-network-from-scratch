@@ -2,9 +2,11 @@ from enum import Enum
 import numpy as np
 from nn_from_scratch.layers.abstract_layer import AbstractLayer
 
+
 class ActivationType(Enum):
     RELU = 1
     SOFTMAX = 2
+
 
 class LinearLayer(AbstractLayer):
     def __init__(self, neurons: int, prev_neurons: int):

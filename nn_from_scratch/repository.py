@@ -2,6 +2,7 @@ import numpy as np
 import json
 from nn_from_scratch.network import Network
 
+
 class Repository:
     def store(self, network: Network, file_path: str):
         weights_and_biases = {
@@ -12,7 +13,7 @@ class Repository:
             "output_layer": {
                 "weights": network.output_layer.W.tolist(),
                 "biases": network.output_layer.b.tolist(),
-            }
+            },
         }
 
         with open(file_path, "w") as f:

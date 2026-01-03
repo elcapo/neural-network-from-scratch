@@ -12,11 +12,27 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "coverage>=7.13.1",
     "poethepoet>=0.39.0",
     "pytest>=9.0.2",
-    "pytest-cov>=7.0.0",
+    "ruff>=0.14.10",
 ]
 
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "pragma: exclude file",
+]
+
+[tool.ruff]
+line-length = 125
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
 [tool.poe.tasks]
-test = "uv run pytest -vvv"
-coverage = "uv run pytest --cov-report term-missing --cov=nn_from_scratch tests/"
+test = "uv run coverage run -m pytest -vvv tests/"
+coverage = "uv run coverage report -m --include='nn_from_scratch/*'"
+lint = "uv run ruff check --fix"
+format = "uv run ruff format"

@@ -1,9 +1,10 @@
 import numpy as np
 from nn_from_scratch.layers.identity_layer import IdentityLayer
-from nn_from_scratch.layers.linear_layer import LinearLayer, ActivationType
+from nn_from_scratch.layers.linear_layer import LinearLayer
 from nn_from_scratch.layers.relu_layer import ReluLayer
 from nn_from_scratch.layers.softmax_layer import SoftmaxLayer
 from nn_from_scratch.encoders.one_hot_encoder import one_hot_encode
+
 
 class Steps:
     input_layer: np.ndarray
@@ -12,8 +13,9 @@ class Steps:
     output_layer: np.ndarray
     softmax_layer: np.ndarray
 
+
 class Network:
-    def __init__(self, input_size = 28*28, hidden_size = 10, output_size = 10):
+    def __init__(self, input_size=28 * 28, hidden_size=10, output_size=10):
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
@@ -64,7 +66,10 @@ class Network:
             predictions = np.argmax(Y_pred, axis=0)
             accuracy = round(np.sum(predictions == Y) / Y.size, 2)
 
-            yield (i + 1, accuracy,)
+            yield (
+                i + 1,
+                accuracy,
+            )
 
     def backward(self, X: np.ndarray, Y: np.ndarray, Y_pred: np.ndarray, steps: Steps, learning_rate: float = 0.01):
         m = Y.shape[0]
@@ -82,7 +87,9 @@ class Network:
 
         self.update_params(dW_o, db_o, dW_h, db_h, learning_rate)
 
-    def update_params(self, dW_o: np.ndarray, db_o: np.ndarray, dW_h: np.ndarray, db_h: np.ndarray, learning_rate: float = 0.01):
+    def update_params(
+        self, dW_o: np.ndarray, db_o: np.ndarray, dW_h: np.ndarray, db_h: np.ndarray, learning_rate: float = 0.01
+    ):
         self.output_layer.W = self.output_layer.W - learning_rate * dW_o
         self.output_layer.b = self.output_layer.b - learning_rate * db_o
         self.hidden_layer.W = self.hidden_layer.W - learning_rate * dW_h

@@ -1,5 +1,6 @@
 import sys
 
+
 def show_progress(step: int, max: int, message: str):
     assert max >= step
 

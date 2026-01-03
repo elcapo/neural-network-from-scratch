@@ -2,12 +2,13 @@ from pathlib import Path
 from zipfile import ZipFile
 import pandas as pd
 
+
 class Dataset:
-    def __init__(self, split: str = 'train'):
+    def __init__(self, split: str = "train"):
         self.split = split
 
     def get_path(self):
-        return Path(__file__).parent.parent.resolve().joinpath(f"resources/data/")
+        return Path(__file__).parent.parent.resolve().joinpath("resources/data/")
 
     def get_compressed_filename(self) -> str:
         return str(self.get_path().joinpath(f"mnist_{self.split}.zip"))
@@ -36,4 +37,4 @@ class Dataset:
         X = self.read_dataframe()
         Y = X.label.copy()
         del X["label"]
-        return X.T.to_numpy() / 255., Y.to_numpy()
+        return X.T.to_numpy() / 255.0, Y.to_numpy()

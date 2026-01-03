@@ -1,6 +1,7 @@
 import numpy as np
 from nn_from_scratch.layers.abstract_layer import AbstractLayer
 
+
 class IdentityLayer(AbstractLayer):
     def __init__(self, neurons: int):
         self.neurons = neurons
