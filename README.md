@@ -141,7 +141,7 @@ uv run poe test
 
 ### Coverage
 
-The Pytest Coverage plugin is also installed, so a test coverage report can easily be obtained:
+The Coverage plugin is also installed and configured, so a test coverage report can easily be obtained:
 
 ```bash
 uv run poe coverage
@@ -153,15 +153,26 @@ You'll typically want to run tests and test coverage all at once:
 uv run poe test && uv run poe coverage
 ```
 
-## Coding styles
+## Lint and Format
+
+### Lint
+
+The Ruff development dependency takes care of linting and formatting the code. To run the linter:
 
 ```bash
-# Run the linter fixes
 uv run poe lint
+```
 
-# Run the format fixes
+### Format
+
+To run the formatter:
+
+```bash
 uv run poe format
+```
 
-# Run the linter and formatter fixes
+To run both the linting and formatting at once:
+
+```bash
 uv run poe lint && uv run poe format
 ```
