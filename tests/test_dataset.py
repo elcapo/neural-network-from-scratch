@@ -1,4 +1,3 @@
-from pathlib import Path
 from zipfile import ZipFile
 from nn_from_scratch.dataset import Dataset
 
