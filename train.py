@@ -17,7 +17,7 @@ def main():
 
     nn = Network()
 
-    total_iterations = 2500
+    total_iterations = 3000
     show_progress(0, 100, f"0 completed iterations from a total of {total_iterations}")
 
     for iteration, accuracy in nn.train(X, Y, iterations=total_iterations, learning_rate=0.25):
