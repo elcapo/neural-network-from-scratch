@@ -11,10 +11,12 @@ class SoftmaxLayer(AbstractLayer):
         assert isinstance(X, np.ndarray), "X must be a Numpy array"
         assert X.shape[0] == self.prev_neurons
 
-        if training:
-            self.Y_pred = X
+        Y_pred = np.exp(X) / np.sum(np.exp(X), axis=0, keepdims=True)
 
-        return np.exp(X) / np.sum(np.exp(X), axis=0, keepdims=True)
+        if training:
+            self.Y_pred = Y_pred
+
+        return Y_pred
 
     def backward(self, prev: np.ndarray, Y: np.ndarray, dL_prev: np.ndarray) -> np.ndarray:
         return self.Y_pred - one_hot_encode(Y, self.prev_neurons)
