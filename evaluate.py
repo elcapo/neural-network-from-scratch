@@ -1,6 +1,10 @@
 import sys
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+
+matplotlib.use("TkAgg")
+
+import matplotlib.pyplot as plt  # noqa: E402
 from nn_from_scratch.dataset import Dataset
 from nn_from_scratch.evaluation import Evaluation
 from nn_from_scratch.network import Network
