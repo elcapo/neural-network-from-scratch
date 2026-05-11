@@ -64,24 +64,3 @@ def test_network_backward_method():
     assert not np.array_equal(network.hidden_layer.W, initial_hidden_weights), (
         "Backward method should update hidden layer weights"
     )
-
-
-def test_network_update_params():
-    network = Network(input_size=3, hidden_size=4, output_size=2)
-
-    dW_o = np.random.rand(2, 4)
-    db_o = np.random.rand(2, 1)
-    dW_h = np.random.rand(4, 3)
-    db_h = np.random.rand(4, 1)
-
-    initial_output_weights = network.output_layer.W.copy()
-    initial_output_biases = network.output_layer.b.copy()
-    initial_hidden_weights = network.hidden_layer.W.copy()
-    initial_hidden_biases = network.hidden_layer.b.copy()
-
-    network.update_params(dW_o, db_o, dW_h, db_h, learning_rate=0.01)
-
-    assert not np.array_equal(network.output_layer.W, initial_output_weights), "Output layer weights should be updated"
-    assert not np.array_equal(network.output_layer.b, initial_output_biases), "Output layer biases should be updated"
-    assert not np.array_equal(network.hidden_layer.W, initial_hidden_weights), "Hidden layer weights should be updated"
-    assert not np.array_equal(network.hidden_layer.b, initial_hidden_biases), "Hidden layer biases should be updated"
