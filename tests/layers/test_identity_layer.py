@@ -29,3 +29,10 @@ def test_returns_the_unmodified_input():
     identity_layer = IdentityLayer(5)
     X = np.random.rand(5)
     assert (identity_layer.forward(X) == X).all(), "The identity layer should return its unmodified input"
+
+
+def test_backwards_returns_the_unmodified_previous_detivate():
+    identity_layer = IdentityLayer(5)
+    prev = np.random.rand(5)
+    dL_prev = np.random.rand(5)
+    assert (identity_layer.backward(prev, dL_prev) == dL_prev).all(), "The identity layer's backward method should return the previous derivates"
