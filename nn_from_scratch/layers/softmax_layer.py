@@ -18,5 +18,5 @@ class SoftmaxLayer(AbstractLayer):
 
         return Y_pred
 
-    def backward(self, prev: np.ndarray, Y: np.ndarray, dL_prev: np.ndarray) -> np.ndarray:
+    def backward(self, Y: np.ndarray) -> np.ndarray:
         return self.Y_pred - one_hot_encode(Y, self.prev_neurons)

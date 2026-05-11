@@ -15,5 +15,5 @@ class ReluLayer(AbstractLayer):
 
         return np.maximum(0, X)
 
-    def backward(self, prev: np.ndarray, dL_prev: np.ndarray) -> np.ndarray:
+    def backward(self, dL_prev: np.ndarray) -> np.ndarray:
         return dL_prev * (self.X > 0)

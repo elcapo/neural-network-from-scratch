@@ -1,4 +1,3 @@
-from enum import Enum
 import numpy as np
 from nn_from_scratch.layers.abstract_layer import AbstractLayer
 
@@ -22,7 +21,7 @@ class LinearLayer(AbstractLayer):
 
         return self.W.dot(X) + self.b
 
-    def backward(self, prev: np.ndarray, dL_prev: np.ndarray, learning_rate: float = 0.01) -> np.ndarray:
+    def backward(self, dL_prev: np.ndarray, learning_rate: float = 0.01) -> np.ndarray:
         m = dL_prev.shape[1]
 
         dW = dL_prev.dot(self.X.T) / m
