@@ -66,3 +66,35 @@ def test_get_features_and_labels_normalizes_pixels_and_splits_label(monkeypatch,
     assert X.shape == (784, 2), "Features must be returned with shape (pixels, samples)"
     assert ((X == 1.0) | (X == 0.0)).all(), "Pixel values must be normalized to the [0, 1] range"
     assert set(Y.tolist()) == {3, 7}, "Labels must be returned as a 1D array of class indices"
+
+
+def test_sample_returns_n_random_rows_with_indices(monkeypatch, tmp_path):
+    dataset = Dataset(split="train")
+    monkeypatch.setattr(dataset, "get_path", lambda: tmp_path)
+    csv_path = tmp_path / "mnist_train.csv"
+    rows = [",".join([str(label)] + ["255"] * 784) for label in range(20)]
+    csv_path.write_text("\n".join(rows) + "\n")
+
+    X, Y, indices = dataset.sample(5, seed=42)
+
+    assert X.shape == (784, 5), "Features must be returned with shape (pixels, samples)"
+    assert Y.shape == (5,), "Labels must be returned as a 1D array of size n_samples"
+    assert len(indices) == 5, "Indices must have length n_samples"
+    assert len(set(indices)) == 5, "Each chosen row must appear at most once"
+    assert all(0 <= idx < 20 for idx in indices), "Indices must point inside the CSV"
+    assert (X == 1.0).all(), "Pixel values must be normalized to the [0, 1] range"
+    for k, idx in enumerate(indices):
+        assert Y[k] == idx, "Each returned label must correspond to its source row"
+
+
+def test_sample_returns_every_row_when_n_exceeds_dataset(monkeypatch, tmp_path):
+    dataset = Dataset(split="train")
+    monkeypatch.setattr(dataset, "get_path", lambda: tmp_path)
+    csv_path = tmp_path / "mnist_train.csv"
+    rows = [",".join([str(label)] + ["0"] * 784) for label in range(3)]
+    csv_path.write_text("\n".join(rows) + "\n")
+
+    X, Y, indices = dataset.sample(10, seed=0)
+
+    assert X.shape == (784, 3), "sample must clamp to the available number of rows"
+    assert sorted(indices) == [0, 1, 2], "All rows must be returned when n exceeds the dataset"
