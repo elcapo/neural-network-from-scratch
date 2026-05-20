@@ -73,6 +73,16 @@ To install all the dependencies, just run:
 uv sync
 ```
 
+### Inspect
+
+To inspect a random selection of images from the training dataset, run:
+
+```bash
+uv run viewer.py
+```
+
+![Random dataset samples](./resources/images/random-dataset-samples.png)
+
 ### Train
 
 To run the training you can use the convenience script `train.py` that's located at the root of the project:

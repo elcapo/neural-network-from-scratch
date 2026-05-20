@@ -1,5 +1,7 @@
+import random
 from pathlib import Path
 from zipfile import ZipFile
+import numpy as np
 import pandas as pd
 
 
@@ -38,3 +40,26 @@ class Dataset:
         Y = X.label.copy()
         del X["label"]
         return X.T.to_numpy() / 255.0, Y.to_numpy()
+
+    def sample(self, n_samples: int, seed: int | None = None):
+        rng = random.Random(seed)
+        reservoir: list[tuple[int, str]] = []
+
+        with open(self.get_uncompressed_filename()) as f:
+            for i, line in enumerate(f):
+                if i < n_samples:
+                    reservoir.append((i, line))
+                else:
+                    j = rng.randint(0, i)
+                    if j < n_samples:
+                        reservoir[j] = (i, line)
+
+        indices = [row[0] for row in reservoir]
+        data = np.array(
+            [[int(value) for value in row[1].split(",")] for row in reservoir],
+            dtype=np.float64,
+        )
+        Y = data[:, 0].astype(np.int64)
+        X = data[:, 1:].T / 255.0
+
+        return X, Y, indices
